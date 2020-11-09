@@ -31,9 +31,21 @@ full_path_t * split_path(string_t path)
     char *p = path.data + path.length - 1;
     while(p >= path.data && *p != path_separator && *p != wrong_path_separator)
         p--;
-    fp->file_name = sub_string(path, p - path.data + 1, path.data + path.length - p - 1);    
-    fp->path = sub_string(path, 0, p - path.data);
-    fix_path_separators(fp->path->data);
+    fp->file_name = sub_string(path, p - path.data + 1, path.data + path.length - p - 1);
+    if (p > path.data)
+    {
+        fp->path = sub_string(path, 0, p - path.data);
+        fix_path_separators(fp->path->data);
+    }
+    else if (p == path.data)
+    {
+        char c[2] = { path_separator, 0 };
+        string_t s = { c, 1 };
+        fp->path = duplicate_string(s);
+    }
+    else
+    {
+        fp->path = duplicate_string(__S("."));
+    }
     return fp;
 }
-
