@@ -1,0 +1,19 @@
+{
+    "name": "files",
+    "description": "Working with files and folders in programs written in the C language",
+    "author": "c factory",
+    "type": "library",
+    "sources": "src/*.c",
+    "headers": "include",
+    "depends":
+    [
+        {
+            "name": "collections",
+            "url": ["../collections", "https://github.com/c-factory/collections.git"]
+        },
+        {
+            "name": "strings",
+            "url": ["../strings", "https://github.com/c-factory/strings.git"]
+        }
+    ]
+}

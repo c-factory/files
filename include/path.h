@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "strings/strings.h"
+#include "strings.h"
 
 typedef struct
 {
