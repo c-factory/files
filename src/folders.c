@@ -7,6 +7,9 @@
 #include "files.h"
 #include <dirent.h>
 #include <string.h>
+#ifdef linux
+#include <sys/stat.h>
+#endif
 
 bool folder_exists(const char *folder_name)
 {
@@ -38,5 +41,19 @@ bool folder_exists_and_not_empty(const char *folder_name)
         }
         closedir(dir);
     }
+    return result;
+}
+
+bool make_folder(const char *folder_name)
+{
+    bool result = false;
+#ifdef _WIN32
+    if (0 == mkdir(folder_name))
+        result = true;
+#endif
+#ifdef linux
+    if (0 == mkdir(folder_name, 0770))
+        result = true;
+#endif
     return result;
 }
